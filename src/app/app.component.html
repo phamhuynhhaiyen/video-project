@@ -1,7 +1,7 @@
 <div class="sidebar">
   <mat-nav-list>
     @for (video of videoLst; track video) {
-    <mat-list-item (click)="getVideo(video.id)" [ngClass]="currentId === video.id ? 'active' : ''">
+    <mat-list-item (click)="getVideo(video.id)" [ngClass]="currentId === video.id ? 'active' : video.success ? 'success-state': 'unsuccess-state'">
       <a matListItemTitle>{{ video.id }}</a>
     </mat-list-item>
     }

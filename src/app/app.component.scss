@@ -1,79 +1,88 @@
-:host{
-    display: flex;
-    padding: 1rem;
-    gap: 1rem;
+:host {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
 }
 
-.sidebar{
-    width: 30%;
-    height: calc(100vh - 2rem);
-    overflow-y: scroll;
-    padding: 0 0.5rem;
+.sidebar {
+  width: 30%;
+  height: calc(100vh - 2rem);
+  overflow-y: scroll;
+  padding: 0 0.5rem;
 }
 
-.sidebar, .main-content{
+.sidebar,
+.main-content {
   background-color: #fff;
   border-radius: 0.5rem;
- 
+
 }
 
-.main-content{
-    width: 100%;
-    padding: 1rem;
+.main-content {
+  width: 100%;
+  padding: 1rem;
 }
 
-.video-container{
-    display: flex;
-    width: 100%;
-    gap: 2rem;
+.video-container {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
 
-    .video-item{
-        flex: 1 1;
-        width: 20rem;
-        max-height: 80vh;
-        border-radius: 0.5rem;
-    }
+  .video-item {
+    flex: 1 1;
+    width: 20rem;
+    max-height: 80vh;
+    border-radius: 0.5rem;
+  }
 }
-  
+
 .progress-bar {
-    padding: 0;
-  }
-  
-  .progress {
-    width: 50px;
-  }
-  
-  #fileInput {
-    position: absolute;
-    cursor: pointer;
-    z-index: 10;
-    opacity: 0;
-    height: 100%;
-    left: 0px;
-    top: 0px;
-    width: calc(100% - 100px);
-  }
-  
-  .mat-toolbar-single-row {
-    height: auto !important;
-    background: transparent;
-    padding: 0;
-    font-size: 1rem;
-  }
-  
-  .mat-toolbar-single-row button {
-    width: 100px;
-  }
-  
-  .form-field {
-    width: 100%;
-  }
-  
-  .active{
-    background: #d7e3ff;
-    border-radius: 0.3rem;
+  padding: 0;
+}
 
-    a{
-      color: #005cbb;
-    }
+.progress {
+  width: 50px;
+}
+
+#fileInput {
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  width: calc(100% - 100px);
+}
+
+.mat-toolbar-single-row {
+  height: auto !important;
+  background: transparent;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.mat-toolbar-single-row button {
+  width: 100px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.active {
+  background: #d7e3ff;
+  border-radius: 0.3rem;
+
+  a {
+    color: #005cbb;
   }
+}
+
+.success-state a{
+  color: green;
+}
+
+.unsuccess-state a{
+  color: #ba1a1a;
+}
