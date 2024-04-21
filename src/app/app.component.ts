@@ -50,10 +50,8 @@ export class AppComponent implements OnInit {
   }
 
   getVideo(id: string) {
-    // console.log(id.slice(0,id.indexOf('.')))
-
-    const newId = id.slice(0, id.indexOf('.'))
-    this.videoService.getVideo(newId).subscribe(res => {
+    // const newId = id.slice(0, id.indexOf('.'))
+    this.videoService.getVideo(id).subscribe(res => {
       console.log(res)
       this.video = res;
       this.currentId = id;
