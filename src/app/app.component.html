@@ -1,8 +1,8 @@
 <div class="sidebar">
   <mat-nav-list>
-    @for (id of videoLst; track id) {
-    <mat-list-item (click)="getVideo(id)" [ngClass]="currentId === id ? 'active' : ''">
-      <a matListItemTitle>{{ id }}</a>
+    @for (video of videoLst; track id) {
+    <mat-list-item (click)="getVideo(video.id)" [ngClass]="currentId === video.id ? 'active' : ''">
+      <a matListItemTitle>{{ video.id }}</a>
     </mat-list-item>
     }
   </mat-nav-list>

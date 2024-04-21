@@ -30,7 +30,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  videoLst: string[] = []
+  videoLst: any[] = []
   video: SafeUrl = "";
   file?: File;
   fileName: string = 'Select File';
