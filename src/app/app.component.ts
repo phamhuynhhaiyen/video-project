@@ -8,6 +8,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { SafeUrl } from '@angular/platform-browser';
 import { VideoService } from './core/services/video.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { NgClass, NgIf } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +22,9 @@ import { VideoService } from './core/services/video.service';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    NgIf,
+    NgClass
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
@@ -27,13 +32,18 @@ import { VideoService } from './core/services/video.service';
 export class AppComponent implements OnInit {
   videoLst: string[] = []
   video: SafeUrl = "";
-  file!: File;
-  progress = 0;
+  file?: File;
   fileName: string = 'Select File';
+  isUploading: boolean = false;
+  currentId: string = ""
 
-  constructor(private videoService: VideoService) { }
+  constructor(private videoService: VideoService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.getAllVideo()
+  }
+
+  getAllVideo() {
     this.videoService.getAllVideos().subscribe(res => {
       this.videoLst = res.data
     })
@@ -41,10 +51,12 @@ export class AppComponent implements OnInit {
 
   getVideo(id: string) {
     // console.log(id.slice(0,id.indexOf('.')))
+
     const newId = id.slice(0, id.indexOf('.'))
     this.videoService.getVideo(newId).subscribe(res => {
       console.log(res)
-      this.video = res
+      this.video = res;
+      this.currentId = id;
     })
   }
 
@@ -62,7 +74,24 @@ export class AppComponent implements OnInit {
   }
 
   uploadVideo() {
-    this.videoService.uploadVideo(this.file).subscribe(res => console.log(res))
+    if (this.file) {
+      this.isUploading = true;
+      this.videoService.uploadVideo(this.file).subscribe({
+        next: (res) => {
+          this.fileName = 'Select File';
+          this.file = undefined;
+          this.getAllVideo();
+          this.isUploading = false;
+          this._snackBar.open('Upload successful.', undefined, {
+            duration: 2000
+          })
+        },
+        error: (err) => {
+          this.file = undefined;
+          this.isUploading = false
+        }
+      })
+    }
   }
 
 }

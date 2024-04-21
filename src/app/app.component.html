@@ -1,8 +1,8 @@
 <div class="sidebar">
   <mat-nav-list>
     @for (id of videoLst; track id) {
-    <mat-list-item>
-      <a matListItemTitle (click)="getVideo(id)">{{ id }}</a>
+    <mat-list-item (click)="getVideo(id)" [ngClass]="currentId === id ? 'active' : ''">
+      <a matListItemTitle>{{ id }}</a>
     </mat-list-item>
     }
   </mat-nav-list>
@@ -10,12 +10,9 @@
 
 <div class="main-content">
   <div class="upload-container">
-    <!-- <input type="file" accept="video/*"> -->
-      <!-- <mat-toolbar  class="progress-bar">
-        <mat-progress-bar color="accent" [value]="progress"></mat-progress-bar>
-        <span class="progress">{{ progress }}%</span>
-      </mat-toolbar> -->
-    
+    @if(isUploading){
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
       <mat-form-field class="form-field">
         <div>
           <mat-toolbar>
@@ -25,6 +22,7 @@
               mat-flat-button
               color="primary"
               (click)="uploadVideo()"
+              [disabled]="isUploading"
             >
               Upload
             </button>
@@ -32,6 +30,7 @@
     
           <input
             type="file"
+            accept="video/*"
             id="fileInput"
             name="fileInput"
             (change)="onInput($event)"
@@ -44,11 +43,3 @@
     <video [src]="video" autoplay controls class="video-item"></video>
   </div>
 </div>
-
-
-<!-- 
-<input
-       type="file"
-       (input)="onInput($event)"
->
-<button (click)="uploadVideo()">Upload Video</button> -->

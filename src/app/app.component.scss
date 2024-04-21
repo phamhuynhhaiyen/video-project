@@ -1,15 +1,25 @@
 :host{
     display: flex;
-    padding: 0.5rem;
+    padding: 1rem;
     gap: 1rem;
 }
 
 .sidebar{
     width: 30%;
+    height: calc(100vh - 2rem);
+    overflow-y: scroll;
+    padding: 0 0.5rem;
+}
+
+.sidebar, .main-content{
+  background-color: #fff;
+  border-radius: 0.5rem;
+ 
 }
 
 .main-content{
     width: 100%;
+    padding: 1rem;
 }
 
 .video-container{
@@ -59,3 +69,11 @@
     width: 100%;
   }
   
+  .active{
+    background: #d7e3ff;
+    border-radius: 0.3rem;
+
+    a{
+      color: #005cbb;
+    }
+  }

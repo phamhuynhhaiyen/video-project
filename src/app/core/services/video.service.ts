@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { map, Observable } from 'rxjs';
@@ -35,7 +35,12 @@ export class VideoService {
   uploadVideo(fileInput: File) {
     let formParams = new FormData();
     formParams.append('file', fileInput)
-    return this.http.post(`${API_URL}/upload`, formParams)
+    // const req = new HttpRequest('POST', `${API_URL}/upload`, formParams, {
+    //   reportProgress: true,
+    //   responseType: 'json'
+    // })
+    return this.http.post(`${API_URL}/upload`, formParams);
+    // return this.http.request(req)
   }
 
 }
