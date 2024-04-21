@@ -32,15 +32,28 @@ export class VideoService {
       );
   }
 
+  public getPredictedVideo(id: string): Observable<SafeUrl> {
+    // const params = new HttpParams().set('id', id);
+    return this.http
+      .get(`${API_URL}/${id}/predicted-stream`, { responseType: 'arraybuffer' })
+      .pipe(
+        map((video) => {
+          const blob = new Blob([video], { type: 'video/mp4' });
+
+          return this.domSanitizer.bypassSecurityTrustUrl(
+            URL.createObjectURL(blob)
+          );
+        })
+      );
+  }
+
+  ///predicted-stream
+  
+
   uploadVideo(fileInput: File) {
     let formParams = new FormData();
     formParams.append('file', fileInput)
-    // const req = new HttpRequest('POST', `${API_URL}/upload`, formParams, {
-    //   reportProgress: true,
-    //   responseType: 'json'
-    // })
     return this.http.post(`${API_URL}/upload`, formParams);
-    // return this.http.request(req)
   }
 
 }

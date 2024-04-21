@@ -32,6 +32,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AppComponent implements OnInit {
   videoLst: any[] = []
   video: SafeUrl = "";
+  videoPredict: SafeUrl = "";
   file?: File;
   fileName: string = 'Select File';
   isUploading: boolean = false;
@@ -50,10 +51,12 @@ export class AppComponent implements OnInit {
   }
 
   getVideo(id: string) {
-    // const newId = id.slice(0, id.indexOf('.'))
     this.videoService.getVideo(id).subscribe(res => {
-      console.log(res)
       this.video = res;
+      this.currentId = id;
+    })
+    this.videoService.getPredictedVideo(id).subscribe(res=>{
+      this.videoPredict = res;
       this.currentId = id;
     })
   }
